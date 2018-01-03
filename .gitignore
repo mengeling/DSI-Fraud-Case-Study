@@ -1,6 +1,6 @@
 .idea
 .ipynb_checkpoints
-.ipynb
+*.ipynb
 .DS_Store
 *.pyc
 *.json
