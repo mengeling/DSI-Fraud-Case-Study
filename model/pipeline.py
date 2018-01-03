@@ -11,7 +11,7 @@ def strip_html(txt):
 
 
 def get_text_data(df):
-    return df["description"].apply(strip_html).values
+    return df["description"].apply(strip_html)
 
 
 def get_numeric_data(df):
@@ -24,7 +24,7 @@ def get_numeric_data(df):
     ]
     df.drop(cols, axis=1, inplace=True)
     df.dropna(inplace=True)
-    return pd.get_dummies(df).values
+    return pd.get_dummies(df)
 
 
 def unpack(ticket_types_lst):
@@ -35,7 +35,7 @@ def main():
     df = pd.read_json('../data/data.json')
     y = get_labels(df.pop("acct_type"))
     X_text = get_text_data(df)
-    X_num = get_numeric_data(df)
+    X_num = get_numeric_data(df).values
     return X_text, X_num, y
 
 
