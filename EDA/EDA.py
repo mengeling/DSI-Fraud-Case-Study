@@ -11,7 +11,7 @@ def get_data(filename):
     return pd.read_json(filename)
 
 
-def clean_data(df):
+def clean_numerical_data(df):
     df["fraud"] = (df["acct_type"] != "premium").astype(int)
     cols = ["country", "description", "email_domain", "ticket_types", "venue_address", "venue_country", "venue_latitude",
              "has_header", "venue_longitude", "venue_name", "venue_state", "name", "object_id", "org_desc",
@@ -22,6 +22,11 @@ def clean_data(df):
     return pd.get_dummies(df)
 
 
+def clean_text_data(df):
+
+
+
 if __name__ == '__main__':
     df = get_data('../data/data.json')
-    df = clean_data(df)
+    numerical_df = clean_numerical_data(df)
+    text_df = clean_text_data(df)
