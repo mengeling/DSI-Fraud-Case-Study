@@ -1,6 +1,6 @@
 import sys
 sys.path.append('..')
-from model.pipeline import clean_numeric_data
+from model.pipeline import get_numeric_data
 
 
 

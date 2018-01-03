@@ -2,14 +2,6 @@ import pandas as pd
 from bs4 import BeautifulSoup
 
 
-def read_file(filename):
-    '''
-    parameters: filename
-    return: Pandas DataFrame
-    '''
-    return pd.read_json(filename)
-
-
 def get_text_data(txt):
     return BeautifulSoup(txt).text
 
@@ -33,7 +25,7 @@ def unpack(ticket_types_lst):
 
 
 def main():
-    df = read_file('../data/data.json')
+    df = pd.read_json('../data/data.json')
     X_text = df["description"].apply(get_text_data).values
     df = get_numeric_data(df)
     y = df.pop('fraud').values
