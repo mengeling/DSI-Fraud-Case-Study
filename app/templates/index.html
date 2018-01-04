@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>News Category Predictor</title>
+		<title>Fraud Detection</title>
 		<meta charset="utf-8">
 	  	<meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/styles.css')}}">
@@ -11,15 +11,66 @@
     <h1 class="title">Fraud Detection</h1>
         <div>
             <h3>High Risk</h3>
-            <p>{{ high_risk_data }}</p>
+            <table>
+                <thead>
+                    <th>Event Name</th>
+                    <th>Payout Date</th>
+                    <th>Probability</th>
+                    <th>Prediction</th>
+                </thead>
+                <tbody>
+                    {% for high in high_risk %}
+                        <tr>
+                            <td class="left-align">{{high[0]}}</td>
+                            <td>{{high[1]}}</td>
+                            <td>{{high[2]}}</td>
+                            <td>{{high[3]}}</td>
+                        <tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
         <div>
             <h3>Medium Risk</h3>
-            <p>{{ med_risk_data }}</p>
+            <table>
+                <thead>
+                    <th>Event Name</th>
+                    <th>Payout Date</th>
+                    <th>Probability</th>
+                    <th>Prediction</th>
+                </thead>
+                <tbody>
+                    {% for medium in medium_risk %}
+                        <tr>
+                            <td class="left-align">{{medium[0]}}</td>
+                            <td>{{medium[1]}}</td>
+                            <td>{{medium[2]}}</td>
+                            <td>{{medium[3]}}</td>
+                        <tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
         <div>
             <h3>Low Risk</h3>
-            <p>{{ low_risk_data }}</p>
+            <table>
+                <thead>
+                    <th>Event Name</th>
+                    <th>Payout Date</th>
+                    <th>Probability</th>
+                    <th>Prediction</th>
+                </thead>
+                <tbody>
+                    {% for low in high_risk %}
+                        <tr>
+                            <td class="left-align">{{low[0]}}</td>
+                            <td>{{low[1]}}</td>
+                            <td>{{low[2]}}</td>
+                            <td>{{low[3]}}</td>
+                        <tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
 
 	</body>
