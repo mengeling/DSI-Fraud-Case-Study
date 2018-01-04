@@ -1,18 +1,17 @@
-from flask import Flask, request, render_template
 import json
 import requests
 import pickle
 import time
-import pymongo
-from datetime import datetime
+from flask import Flask, request, render_template
+from pymongo import MongoClient
 import sys
 sys.path.append('..')
-
-# from model import predict
+from model.model import predict
+from model.pipeline import clean_data, main
+from model.model import MyModel
 
 app = Flask(__name__)
-DATA = []
-TIMESTAMP = []
+
 
 data = {
     "approx_payout_date": 1366956000,
@@ -85,18 +84,6 @@ data = {
 }
 
 
-def get_live_data():
-    r = requests.get('http://galvanize-case-study-on-fraud.herokuapp.com/data_point')
-    return json.dumps(r.json(), sort_keys=True, indent=4, separators=(',', ': '))
-    # DATA.append(json.dumps(r.json(), sort_keys=True, indent=4, separators=(',', ': ')))
-    # TIMESTAMP.append(time.time())
-
-def get_data_from_db():
-    r = db.collection.findOne()
-    return json.dumps(r.json(), sort_keys=True, indent=4, separators=(',', ': '))
-    # DATA.append(json.dumps(r.json(), sort_keys=True, indent=4, separators=(',', ': ')))
-    # TIMESTAMP.append(time.time())
-
 
 
 @app.route('/')
@@ -123,25 +110,38 @@ def score():
     return render_template('submit.html', data=data)
 
 
-# @app.route('/check')
-# def check():
-#     line1 = "Number of data points: {0}".format(len(DATA))
-#     if DATA and TIMESTAMP:
-#         dt = datetime.fromtimestamp(TIMESTAMP[-1])
-#         data_time = dt.strftime('%Y-%m-%d %H:%M:%S')
-#         line2 = "Latest datapoint received at: {0}".format(data_time)
-#         line3 = DATA[-1]
-#         output = "{0}\n\n{1}\n\n{2}".format(line1, line2, line3)
-#     else:
-#         output = line1
-#     return output, 200, {'Content-Type': 'text/css; charset=utf-8'}
+def add_to_database(d, collection):
+    obj_id = d["object_id"]
+    if collection.find_one({"object_id": d["object_id"]}) is None:
+        return collection.insert_one(d)
+
+
+def get_data():
+    d = requests.get('http://galvanize-case-study-on-fraud.herokuapp.com/data_point').json()
+    df = pd.DataFrame([d])
+    df = df[["sale_duration2", "user_age", "body_length", "description", "ticket_types"]]
+    df = clean_data(df)
+    X_text = df.pop("description")
+    X_num = df.values
+    return d, X_text, X_num
+
+
+def set_up_database():
+    client = MongoClient()
+    db = client["fraud"]
+    collection = db["fraud"]
+    return collection
 
 
 if __name__ == '__main__':
-    # with open('../model/model.pkl', 'rb') as f:
-    #     model = pickle.load(f)
-    # connect to database
+    collection = set_up_database()
+    with open('../model/model.pkl', 'rb') as f:
+        model = pickle.load(f)
     app.run(host='0.0.0.0', port=8080, debug=True)
     while True:
-        get_data()
+        d, X_text, X_num = get_data()
+        prediction, probability = predict(model, X_text, X_num)
+        d["prediction"] = prediction
+        d["probability"] = probability
+        add_to_database(d)
         time.sleep(5)

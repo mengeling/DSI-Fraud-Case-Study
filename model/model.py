@@ -2,7 +2,7 @@ import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
-from pipeline import main
+from .pipeline import main
 
 
 class MyModel():
@@ -25,6 +25,12 @@ class MyModel():
     def predict(self, X_text, X_num):
         proba = self.predict_proba(X_text, X_num)
         return int(proba > 0.5)
+
+
+def predict(model, X_text, X_num):
+    prediction = model.predict(X_text, X_num)
+    probability = model.predict_proba(X_text, X_num)
+    return prediction, probability
 
 
 if __name__ == '__main__':
