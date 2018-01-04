@@ -26,9 +26,9 @@ def unpack(ticket_types_lst):
 
 def main():
     df = pd.read_json('../data/data.json')
-    X_text = df["description"].apply(get_text_data).values
+    X_text = df["description"].apply(get_text_data)
     df = get_numeric_data(df)
-    y = df.pop('fraud').values
+    y = df.pop('fraud')
     return X_text, df.values, y
 
 
