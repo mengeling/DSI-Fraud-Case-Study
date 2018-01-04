@@ -10,6 +10,7 @@ from model.model import predict
 from model.pipeline import clean_data
 from model.model import MyModel
 
+
 app = Flask(__name__)
 
 

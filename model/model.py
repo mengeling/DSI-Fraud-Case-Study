@@ -2,7 +2,7 @@ import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
-from .pipeline import main
+from pipeline import run_pipeline
 
 
 class MyModel():
@@ -34,7 +34,7 @@ def predict(model, X_text, X_num):
 
 
 if __name__ == '__main__':
-    X_text, X_num, y = main()
+    X_text, X_num, y = run_pipeline()
     model = MyModel()
     model.fit(X_text, X_num, y)
     with open('model.pkl', 'wb') as f:

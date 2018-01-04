@@ -25,7 +25,7 @@ def clean_data(df):
     return df
 
 
-def main():
+def run_pipeline():
     df = pd.read_json('../data/data.json')
     df = df[["sale_duration2", "user_age", "body_length", "description", "acct_type", "ticket_types"]]
     df = clean_data(add_labels(df))
@@ -36,4 +36,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    run_pipeline()
