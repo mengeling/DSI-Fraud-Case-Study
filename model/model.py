@@ -17,10 +17,10 @@ class MyModel():
         self.lr.fit(X_num,y)
 
     def predict_proba(self, X_text, X_num):
-        pred_num = self.lr.predict_proba(X_num)[:, 1]
+        pred_num = self.lr.predict_proba(X_num)[:, 1][0]
         X_t = self.vect.transform(X_text)
-        pred_txt = self.nb.predict_proba(X_t)[:, 1]
-        return (pred_txt[0] + pred_num[0])/2
+        pred_txt = self.nb.predict_proba(X_t)[:, 1][0]
+        return (pred_txt + pred_num)/2
 
     def predict(self, X_text, X_num):
         proba = self.predict_proba(X_text, X_num)
