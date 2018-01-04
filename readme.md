@@ -2,6 +2,14 @@
 
 Use machine learning to identify user accounts that might be fraudulent.
 
+## App Usage
+- Run ```python model.py``` to create a model
+- This model is saved as a pickle file
+- Run ```python app/app.py``` to open a model to base new predictions on
+- An infinite loop is initiated that makes a GET request to the fraud case endpoint
+- The new row is stored in the database along with a prediction and a probability of fraud 
+- Open ```http//:localhost:8000``` in a browser to see front end where fraud predictions appear
+
 ## EDA
 In '''EDA.py''':
 - Create column to label fraud transactions
@@ -26,11 +34,3 @@ In '''model.py''':
 
 ## Team
 - Fraud analysts Michael Engeling, Kim Sorensen, and Owen Temple
-
-## App Usage
-- Run ```python model.py``` to create a model
-- This model is saved as a pickle file
-- Run ```python app/app.py``` to open a model to base new predictions on
-- An infinite loop is initiated that makes a GET request to the fraud case endpoint
-- The new row is stored in the database along with a prediction and a probability of fraud 
-- Open ```http//:localhost:8000``` in a browser to see front end where fraud predictions appear
