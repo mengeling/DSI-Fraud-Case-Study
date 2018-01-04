@@ -21,20 +21,20 @@ def index():
     medium_risk = []
     high_risk = []
     for lst in data:
-        print(lst[2])
-        if lst[2] >= 0.1:
-            high_risk.append(lst)
-        elif (lst[2] > 0.05) and (lst[2] < 0.1):
-            medium_risk.append(lst)
-        else:
-            low_risk.append(lst)
-    return render_template('index.html', high_risk=high_risk, med_risk=medium_risk, low_risk=low_risk)
+        # if lst[2] >= 0.1:
+        #     high_risk.append(lst)
+        # elif (lst[2] > 0.05) and (lst[2] < 0.1):
+        #     medium_risk.append(lst)
+        # # else:
+        # #     low_risk.append(lst)
+        high_risk.append(lst)
+    return render_template('index.html', high_risk=high_risk)
 
 
 def retrieve_data_from_db():
     lst = []
     for i, d in enumerate(collection.find()):
-        if i < 50:
+        if i < 25:
             date = datetime.datetime.fromtimestamp(d["approx_payout_date"])
             if d["prediction"]:
                 prediction = "Fraud"

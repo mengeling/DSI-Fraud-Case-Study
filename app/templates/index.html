@@ -10,7 +10,6 @@
 	<body>
     <h1 class="title">Fraud Detection</h1>
         <div>
-            <h3>High Risk</h3>
             <table>
                 <thead>
                     <th>Event Name</th>
@@ -30,48 +29,7 @@
                 </tbody>
             </table>
         </div>
-        <div>
-            <h3>Medium Risk</h3>
-            <table>
-                <thead>
-                    <th>Event Name</th>
-                    <th>Payout Date</th>
-                    <th>Probability</th>
-                    <th>Prediction</th>
-                </thead>
-                <tbody>
-                    {% for medium in medium_risk %}
-                        <tr>
-                            <td class="left-align">{{medium[0]}}</td>
-                            <td>{{medium[1]}}</td>
-                            <td>{{medium[2]}}</td>
-                            <td>{{medium[3]}}</td>
-                        <tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-        <div>
-            <h3>Low Risk</h3>
-            <table>
-                <thead>
-                    <th>Event Name</th>
-                    <th>Payout Date</th>
-                    <th>Probability</th>
-                    <th>Prediction</th>
-                </thead>
-                <tbody>
-                    {% for low in high_risk %}
-                        <tr>
-                            <td class="left-align">{{low[0]}}</td>
-                            <td>{{low[1]}}</td>
-                            <td>{{low[2]}}</td>
-                            <td>{{low[3]}}</td>
-                        <tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+
 
 	</body>
 </html>
