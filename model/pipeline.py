@@ -12,6 +12,7 @@ def strip_html(txt):
 
 
 def unpack(ticket_types_lst):
+    print(ticket_types_lst)
     return sum(d['quantity_sold'] * d['cost'] for d in ticket_types_lst)
 
 
