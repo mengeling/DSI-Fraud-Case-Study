@@ -17,12 +17,20 @@ In '''model.py''':
 - Create average of probability of fraud produced b
 
 
-
 ## Persistence
--Use monggodb to store new user accounts along with our prediction and the probability of fraud produced by our model
+- Use monggodb to store new user accounts along with our prediction and the probability of fraud produced by our model
 
 ## Interface
--Use Flask to present to user a rating of high, medium, or low risk of an individual user account
+- Use Flask to present to user a rating of high, medium, or low risk of an individual user account
 
- 
 
+## Team
+- Fraud analysts Michael Engeling, Kim Sorensen, and Owen Temple
+
+## App Usage
+- Run ```python model.py``` to create a model
+- This model is saved as a pickle file
+- Run ```python app/app.py``` to open a model to base new predictions on
+- An infinite loop is initiated that makes a GET request to the fraud case endpoint
+- The new row is stored in the database along with a prediction and a probability of fraud 
+- Open ```http//:localhost:8000``` in a browser to see front end where fraud predictions appear
