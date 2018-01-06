@@ -8,28 +8,77 @@
 	</head>
 
 	<body>
-    <h1 class="title">Fraud Detection</h1>
+        <h1 class="title">Fraud Detection</h1>
         <div>
-            <table>
-                <thead>
-                    <th>Event Name</th>
-                    <th>Payout Date</th>
-                    <th>Probability</th>
-                    <th>Prediction</th>
-                </thead>
-                <tbody>
-                    {% for high in high_risk %}
-                        <tr>
-                            <td class="left-align">{{high[0]}}</td>
-                            <td>{{high[1]}}</td>
-                            <td>{{high[2]}}</td>
-                            <td>{{high[3]}}</td>
-                        <tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <h4>High Risk</h4>
+            <div>
+                <table>
+                    <thead>
+                        <th>Organization Name</th>
+                        <th>Event Name</th>
+                        <th>Payout Date</th>
+                        <th>Probability</th>
+                        <th>Prediction</th>
+                    </thead>
+                    <tbody>
+                        {% for high_row in high_risk %}
+                            <tr>
+                                <td class="left-align">{{high_row[0]}}</td>
+                                <td class="left-align">{{high_row[1]}}</td>
+                                <td>{{high_row[2]}}</td>
+                                <td>{{high_row[3]}}</td>
+                                <td>{{high_row[4]}}</td>
+                            <tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <h4>Medium Risk</h4>
+            <div>
+                <table>
+                    <thead>
+                        <th>Organization Name</th>
+                        <th>Event Name</th>
+                        <th>Payout Date</th>
+                        <th>Probability</th>
+                        <th>Prediction</th>
+                    </thead>
+                    <tbody>
+                        {% for medium_row in medium_risk %}
+                            <tr>
+                                <td class="left-align">{{medium_row[0]}}</td>
+                                <td class="left-align">{{medium_row[1]}}</td>
+                                <td>{{medium_row[2]}}</td>
+                                <td>{{medium_row[3]}}</td>
+                                <td>{{medium_row[4]}}</td>
+                            <tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <h4>Low Risk</h4>
+            <div>
+                <table>
+                    <thead>
+                        <th>Organization Name</th>
+                        <th>Event Name</th>
+                        <th>Payout Date</th>
+                        <th>Probability</th>
+                        <th>Prediction</th>
+                    </thead>
+                    <tbody>
+                        {% for low_row in low_risk %}
+                            <tr>
+                                <td class="left-align">{{low_row[0]}}</td>
+                                <td class="left-align">{{low_row[1]}}</td>
+                                <td>{{low_row[2]}}</td>
+                                <td>{{low_row[3]}}</td>
+                                <td>{{low_row[4]}}</td>
+                            <tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-
-
 	</body>
 </html>

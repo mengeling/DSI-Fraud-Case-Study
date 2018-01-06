@@ -7,9 +7,10 @@ body {
 table {
   width: 80%;
   text-align: center;
-  width:70%;
-  margin-left:15%;
-  margin-right:15%;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 10%;
 }
 
 .left-align{

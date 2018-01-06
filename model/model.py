@@ -1,8 +1,7 @@
 import pickle
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
 
 from pipeline import main
 from constants import THRESHOLD
@@ -12,20 +11,20 @@ class MyModel():
     def __init__(self):
         ''' initialize model '''
         self.vect = TfidfVectorizer()
-        self.nb = MultinomialNB()
-        self.lr = LogisticRegression()
+        self.rf_text = RandomForestClassifier(n_estimators=50)
+        self.rf_num = RandomForestClassifier(n_estimators=50)
 
     def fit(self, X_text, X_num, y):
         ''' fit model based on training data '''
         X_text = self.vect.fit_transform(X_text)
-        self.nb.fit(X_text, y)
-        self.lr.fit(X_num,y)
+        self.rf_text.fit(X_text, y)
+        self.rf_num.fit(X_num, y)
 
     def predict_proba(self, X_text, X_num):
         ''' calculate probability that item is fraud '''
-        pred_num = self.lr.predict_proba(X_num)[:, 1]
         X_t = self.vect.transform(X_text)
-        pred_txt = self.nb.predict_proba(X_t)[:, 1]
+        pred_txt = self.rf_text.predict_proba(X_t)[:, 1]
+        pred_num = self.rf_num.predict_proba(X_num)[:, 1]
         return np.mean([pred_txt, pred_num], axis=0)
 
     def predict(self, X_text, X_num):

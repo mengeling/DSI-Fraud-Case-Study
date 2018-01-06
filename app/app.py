@@ -1,5 +1,5 @@
 import os
-import datetime
+from datetime import datetime
 from flask import Flask, render_template
 
 from acquire_data import set_up_database
@@ -10,32 +10,31 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    data = retrieve_data_from_db()
-    low_risk = []
-    medium_risk = []
-    high_risk = []
-    for lst in data:
-        # if lst[2] >= 0.1:
-        #     high_risk.append(lst)
-        # elif (lst[2] > 0.05) and (lst[2] < 0.1):
-        #     medium_risk.append(lst)
-        # # else:
-        # #     low_risk.append(lst)
-        high_risk.append(lst)
-    return render_template('index.html', high_risk=high_risk)
+    high_risk, medium_risk, low_risk = retrieve_data_from_db()
+    return render_template('index.html', high_risk=high_risk, medium_risk=medium_risk, low_risk=low_risk)
 
 
 def retrieve_data_from_db():
-    lst = []
+    high_risk = []
+    medium_risk = []
+    low_risk = []
     for i, d in enumerate(collection.find()):
-        if i < 25:
-            date = datetime.datetime.fromtimestamp(d["approx_payout_date"])
-            if d["prediction"]:
-                prediction = "Fraud"
+        if i < 50:
+            date = datetime.fromtimestamp(d["approx_payout_date"]).strftime('%Y-%m-%d')
+            prediction = "Fraud" if d["prediction"] else "Not Fraud"
+            if d["probability"] >= 0.8:
+                high_risk.append([
+                    d["org_name"], d["name"], date, round(d["probability"], 2), prediction
+                ])
+            elif (d["probability"] > 0.5) and (d["probability"] < 0.8):
+                medium_risk.append([
+                    d["org_name"], d["name"], date, round(d["probability"], 2), prediction
+                ])
             else:
-                prediction = " Not Fraud"
-            lst.append([d["name"], date.strftime('%Y-%m-%d'), round(d["probability"], 2), prediction])
-    return lst
+                low_risk.append([
+                    d["org_name"], d["name"], date, round(d["probability"], 2), prediction
+                ])
+    return high_risk, medium_risk, low_risk
 
 
 if __name__ == '__main__':
