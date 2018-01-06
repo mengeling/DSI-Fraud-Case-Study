@@ -1,7 +1,7 @@
 
 ## Process Flow
 - Ran DecisionTree, RandomForestClassifier, MultinomialNB, and LogisticRegression
-- Decided to avaerage results of MultinomialNB and LogisticRegression
+- Decided to average results of two random forests
    
 ## Preprocessing
 - Take every row that is not labeled "Premium" and tag them as "Fraud" in new column
@@ -9,9 +9,9 @@
 - Take out the 'user_age', 'sale_duration2', and 'body_length'
     
 ## Assessment Metrics Selected
-- Ran accuracy of text classification via score method of MultinomialNB library
-- Ran accuracy of LogisticRegression via score method
-- Calculated precision and recall of LogisticRegression via sklearn precision and recall modules
+- Ran accuracy of text classification via score method of RandomForestClassifier
+- Ran accuracy of numerical classification via score method of RandomForestClassifier
+- Calculated precision and recall via sklearn precision and recall modules
     
 ## Validation and Testing Methodology
 - Use sklearn's train_test_split to reserve 20% of train data 

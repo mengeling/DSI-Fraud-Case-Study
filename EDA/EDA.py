@@ -20,14 +20,14 @@ def plot_histograms(df):
         plt.title(col)
         plt.xlabel(col)
         plt.ylabel("Frequency")
-        plt.savefig("images/hist_{}.png".format(col))
+        plt.savefig("../images/hist_{}.png".format(col))
 
 
 def plot_scatter_matrix(df):
     ''' creates a scatter-matrix plot '''
     scatter_matrix(df, alpha=0.2, figsize=(15, 15), diagonal='kde')
-    plt.tight_layout()
-    plt.savefig("images/scatter_matrix.png")
+    plt.savefig("../images/scatter_matrix.png")
+    plt.clf()
 
 
 def create_confusion_matrix():
@@ -51,10 +51,9 @@ def plot_confusion_matrix():
     for i, j in product(range(cm.shape[0]), range(cm.shape[1])):
         plt.text(j, i, format(cm[i, j], 'd'), horizontalalignment="center",
                  color="white" if cm[i, j] > cm.max() / 2 else "black")
-    plt.tight_layout()
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
-    plt.savefig("images/confusion_matrix.png")
+    plt.savefig("../images/confusion_matrix.png")
 
 
 if __name__ == '__main__':
@@ -63,3 +62,4 @@ if __name__ == '__main__':
     plot_histograms(df[EDA_COLS])
     plot_scatter_matrix(df[EDA_COLS])
     plot_confusion_matrix()
+

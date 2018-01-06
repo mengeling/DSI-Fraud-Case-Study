@@ -11,26 +11,25 @@ Use machine learning to identify user accounts that might be fraudulent.
 - Open ```http//:localhost:8000``` in a browser to see front end where fraud predictions appear
 
 ## EDA
-In '''EDA.py''':
+In ```EDA.py```:
 - Create column to label fraud transactions
 - Create variable with transaction amounts as 'total_payout'
 - Select numerical columns including 'sale_duration2', 'user_age', and 'body_length' 
 - Drop rows with null values
 
-
 ## Machine Learning
-In '''model.py''':
-- Use 'description' column to vectorize, TFIDF, and fit Naive Bayes to predict fraud from text description
-- Use 'sale_duration2', 'user_age', and 'body_length' to fit LogisticRegression to predict fraud
-- Create average of probability of fraud produced b
-
+In ```model.py```:
+- Use 'description' column to vectorize, TFIDF, and fit RandomForestClassifier to predict fraud from text description
+- Use 'sale_duration2', 'user_age', 'total_payout', and 'body_length' to fit RandomForestClassifier to make predictions
+from numerical features
+- Create average of probability of fraud produced
 
 ## Persistence
-- Use monggodb to store new user accounts along with our prediction and the probability of fraud produced by our model
+- Use MongoDB to store new user accounts along with our prediction and the probability of fraud produced by our model
 
 ## Interface
-- Use Flask to present to user a rating of high, medium, or low risk of an individual user account
-
+- Use Flask to present user with a rating of high, medium, or low risk of fraud
 
 ## Team
-- Fraud analysts Michael Engeling, Kim Sorensen, and Owen Temple
+- Fraud analysts: Michael Engeling, Kim Sorensen, and Owen Temple
+
