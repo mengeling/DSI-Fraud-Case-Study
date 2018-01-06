@@ -10,9 +10,9 @@
 	<body>
         <h1 class="title">Fraud Detection</h1>
         <div>
-            <h4>High Risk</h4>
+            <h3>High Risk</h3>
             <div>
-                <table>
+                <table border="1">
                     <thead>
                         <th>Organization Name</th>
                         <th>Event Name</th>
@@ -23,19 +23,19 @@
                     <tbody>
                         {% for high_row in high_risk %}
                             <tr>
-                                <td class="left-align">{{high_row[0]}}</td>
+                                <td class="left-align">{{high_row[2]}}</td>
                                 <td class="left-align">{{high_row[1]}}</td>
-                                <td>{{high_row[2]}}</td>
-                                <td>{{high_row[3]}}</td>
+                                <td>{{high_row[0]}}</td>
                                 <td>{{high_row[4]}}</td>
+                                <td>{{high_row[3]}}</td>
                             <tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
-            <h4>Medium Risk</h4>
+            <h3>Medium Risk</h3>
             <div>
-                <table>
+                <table border="1">
                     <thead>
                         <th>Organization Name</th>
                         <th>Event Name</th>
@@ -46,19 +46,19 @@
                     <tbody>
                         {% for medium_row in medium_risk %}
                             <tr>
-                                <td class="left-align">{{medium_row[0]}}</td>
+                                <td class="left-align">{{medium_row[2]}}</td>
                                 <td class="left-align">{{medium_row[1]}}</td>
-                                <td>{{medium_row[2]}}</td>
-                                <td>{{medium_row[3]}}</td>
+                                <td>{{medium_row[0]}}</td>
                                 <td>{{medium_row[4]}}</td>
+                                <td>{{medium_row[3]}}</td>
                             <tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
-            <h4>Low Risk</h4>
+            <h3>Low Risk</h3>
             <div>
-                <table>
+                <table border="1">
                     <thead>
                         <th>Organization Name</th>
                         <th>Event Name</th>
@@ -69,11 +69,11 @@
                     <tbody>
                         {% for low_row in low_risk %}
                             <tr>
-                                <td class="left-align">{{low_row[0]}}</td>
+                                <td class="left-align">{{low_row[2]}}</td>
                                 <td class="left-align">{{low_row[1]}}</td>
-                                <td>{{low_row[2]}}</td>
-                                <td>{{low_row[3]}}</td>
+                                <td>{{low_row[0]}}</td>
                                 <td>{{low_row[4]}}</td>
+                                <td>{{low_row[3]}}</td>
                             <tr>
                         {% endfor %}
                     </tbody>
