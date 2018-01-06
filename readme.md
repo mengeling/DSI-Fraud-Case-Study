@@ -33,3 +33,5 @@ from numerical features
 ## Team
 - Fraud analysts: Michael Engeling, Kim Sorensen, and Owen Temple
 
+
+![App Screenshot](/images/app_screenshot.png)
