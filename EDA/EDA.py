@@ -1,14 +1,16 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from pandas.plotting import scatter_matrix
+
 import sys
-sys.path.append('..')
-from model.pipeline import clean_data
+sys.path.append('../model')
+from pipeline import clean_data
+from constants import EDA_COLS
 
 
 def plot_histograms(df):
     ''' creates a histogram '''
-    for col in cols:
+    for col in EDA_COLS:
         plt.hist(df[col], bins=50)
         plt.title(col)
         plt.xlabel(col)
@@ -23,11 +25,7 @@ def plot_scatter_matrix(df):
 
 
 if __name__ == '__main__':
-    ''' reads in training data and makes plots '''
+    ''' reads in data and makes plots '''
     df = clean_data(pd.read_json('../data/data.json'))
-    cols = [
-        "user_age", "body_length", "channels", "delivery_method", "fb_published", "has_analytics",
-        "num_payouts", "sale_duration2", "total_payout"
-    ]
-    plot_histograms(df[cols])
-    plot_scatter_matrix(df[cols])
+    plot_histograms(df[EDA_COLS])
+    plot_scatter_matrix(df[EDA_COLS])

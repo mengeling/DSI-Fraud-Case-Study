@@ -2,8 +2,9 @@ import pickle
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
-from pipeline import run_pipeline
-import constants as C
+
+from pipeline import main
+from constants import THRESHOLD
 
 
 class MyModel():
@@ -29,7 +30,7 @@ class MyModel():
     def predict(self, X_text, X_num):
         ''' predict true/false for item '''
         proba = self.predict_proba(X_text, X_num)
-        return int(proba > C.THRESHOLD)
+        return int(proba > THRESHOLD)
 
 
 def predict(model, X_text, X_num):
@@ -41,7 +42,7 @@ def predict(model, X_text, X_num):
 
 if __name__ == '__main__':
     ''' run model.py to generate a model to base predictions on'''
-    X_text, X_num, y = run_pipeline()
+    X_text, X_num, y = main()
     model = MyModel()
     model.fit(X_text, X_num, y)
     with open('model.pkl', 'wb') as f:

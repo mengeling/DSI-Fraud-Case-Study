@@ -1,14 +1,8 @@
-import json
-import requests
-import pickle
-import time
-import threading
 import os
 import datetime
-import pandas as pd
 from flask import Flask, render_template
+
 from acquire_data import set_up_database
-from pymongo import MongoClient
 
 
 app = Flask(__name__)
