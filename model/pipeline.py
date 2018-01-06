@@ -1,7 +1,7 @@
 import pandas as pd
 from bs4 import BeautifulSoup
 
-from constants import TRAIN_COLS
+from constants import MODEL_COLS
 
 
 def add_labels(df):
@@ -34,7 +34,7 @@ def clean_data(df):
 def main():
     ''' extracts text, numeric values, and labels from training data '''
     df = pd.read_json('../data/data.json')
-    df = df[TRAIN_COLS]     # MODEL_COLS defined in constants.py
+    df = df[MODEL_COLS]     # MODEL_COLS defined in constants.py
     df = clean_data(add_labels(df))
     y = df.pop("fraud")
     X_text = df.pop("description")

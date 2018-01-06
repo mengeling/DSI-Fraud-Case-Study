@@ -1,4 +1,5 @@
 import pickle
+import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.linear_model import LogisticRegression
@@ -22,15 +23,15 @@ class MyModel():
 
     def predict_proba(self, X_text, X_num):
         ''' calculate probability that item is fraud '''
-        pred_num = self.lr.predict_proba(X_num)[:, 1][0]
+        pred_num = self.lr.predict_proba(X_num)[:, 1]
         X_t = self.vect.transform(X_text)
-        pred_txt = self.nb.predict_proba(X_t)[:, 1][0]
-        return (pred_txt + pred_num)/2
+        pred_txt = self.nb.predict_proba(X_t)[:, 1]
+        return np.mean([pred_txt, pred_num], axis=0)
 
     def predict(self, X_text, X_num):
         ''' predict true/false for item '''
         proba = self.predict_proba(X_text, X_num)
-        return int(proba > THRESHOLD)
+        return (proba > THRESHOLD).astype(int)
 
 
 def predict(model, X_text, X_num):

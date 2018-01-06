@@ -8,7 +8,7 @@ import sys
 sys.path.append('../model')
 from model import predict, MyModel
 from pipeline import clean_data
-from constants import TEST_COLS
+from constants import PREDICT_COLS
 
 
 def add_to_database(d):
@@ -19,7 +19,7 @@ def add_to_database(d):
 def get_datapoint():
     d = requests.get('http://galvanize-case-study-on-fraud.herokuapp.com/data_point').json()
     df = pd.DataFrame([d])
-    df = df[TEST_COLS]
+    df = df[PREDICT_COLS]
     df = clean_data(df)
     X_text = df.pop("description")
     return d, X_text, df
@@ -38,8 +38,8 @@ def acquire_data():
         X_num = df.values
         prediction, probability = predict(model, X_text, X_num)
         d["total_payout"] = df["total_payout"].values[0]
-        d["prediction"] = prediction
-        d["probability"] = probability
+        d["prediction"] = float(prediction[0])
+        d["probability"] = probability[0]
         add_to_database(d)
         time.sleep(10)
 
